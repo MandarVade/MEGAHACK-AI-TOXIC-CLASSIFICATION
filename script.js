@@ -1,15 +1,15 @@
-const inputValue = document.querySelector("#user-input"); // Select input field
-const addButton = document.querySelector("#add"); // Select button
-const chatBox = document.querySelector("#chat-box"); // Select chat area
+const inputValue = document.querySelector("#user-input"); 
+const addButton = document.querySelector("#add");
+const chatBox = document.querySelector("#chat-box");
 
-let messages = []; // Empty array to store messages
+let messages = [];
 
 addButton.onclick = () => {
-    const task = inputValue.value.trim(); // Get input and remove extra spaces
+    const task = inputValue.value.trim();
 
     if (task) {
-        messages.push(task); // Add input to the array
-        console.log("Messages:", messages); // Print array to console
+        messages.push(task);
+        console.log("Messages:", messages);
 
         // Display message in chat box
         chatBox.innerHTML += `<div class="message user">${task}</div>`;
