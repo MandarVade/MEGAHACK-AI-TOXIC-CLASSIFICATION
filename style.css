@@ -4,7 +4,6 @@
     padding: 0;
     box-sizing: border-box;
 }
-
 /* Variables */
 :root {
     --primary-color: #5663f7;
@@ -29,7 +28,7 @@ body {
     background-color: var(--background-dark);
     color: var(--text-light);
     line-height: 1.6;
-    min-height: 100vh;
+    min-height: 90vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -39,7 +38,7 @@ body {
 .app-container {
     width: 100%;
     max-width: 1200px;
-    min-height: 90vh;
+    min-height: 80vh;
     background-color: var(--background-medium);
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
@@ -51,7 +50,7 @@ body {
 /* Header Styles */
 .app-header {
     background-color: var(--background-light);
-    padding: 20px 40px;
+    padding: 10px 20px 10px 20px;
     text-align: center;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -61,7 +60,8 @@ body {
     justify-content: center;
     align-items: center;
     gap: 15px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
+    padding-left: 20px;
 }
 
 .logo i {
@@ -85,7 +85,7 @@ body {
 .app-main {
     display: flex;
     flex: 1;
-    padding: 20px;
+    padding: 20px 10px 10px 20px;
     gap: 20px;
 }
 
@@ -109,7 +109,7 @@ body {
 
 .chat-header {
     background-color: var(--primary-color);
-    padding: 15px 20px;
+    padding: 10px 20px 10px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -388,5 +388,56 @@ textarea::placeholder {
     
     .message {
         max-width: 95%;
+    }
+}
+/* Header actions container */
+.header-actions {
+    display: flex;
+    align-items: center;
+}
+
+/* Logout button styling */
+.logout-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 1rem;
+    margin: 1rem;
+    background-color: rgba(0, 0, 0, 0.2);
+    color: var(--text-light);
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition-speed);
+}
+
+.logout-btn:hover {
+    background-color: var(--danger-color);
+}
+
+.logout-btn i {
+    font-size: var(--font-size-md);
+}
+
+/* Make sure the header is displayed as a row with space between logo and logout */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-md) var(--space-lg);
+    background-color: var(--background-medium);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 500px) {
+    .logout-btn span {
+        display: none;
+    }
+    
+    .logout-btn {
+        padding: 0.5rem;
     }
 }

@@ -4,19 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Toxicity Classifier</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="app-container">
         <header class="app-header">
             <div class="logo">
-                <i class="fas fa-shield-alt"></i>
+                <i class="fa-solid fa-shield-halved"></i>
                 <h1>ToxiScan</h1>
             </div>
-            <p class="tagline">AI-Powered Content Toxicity Detection</p>
+            <div class="header-actions">
+                <button id="logout-btn" class="logout-btn"onclick="window.open('login.html','_blank')" title="Log out">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
         </header>
-        
         <main class="app-main">
             <div class="chat-container">
                 <div class="chat-header">
@@ -32,7 +36,6 @@
                 </div>
                 
                 <div class="chat-box" id="chat-box">
-                    <!-- Messages will be inserted here via JavaScript -->
                 </div>
                 
                 <div class="chat-input-container">
@@ -74,12 +77,7 @@
                 </div>
             </div>
         </main>
-        
-        <footer class="app-footer">
-            <p>ToxiScan AI Toxicity Classifier &copy; 2025</p>
-        </footer>
-    </div>
-    
+    </div> 
     <script src="script.js"></script>
 </body>
 </html>

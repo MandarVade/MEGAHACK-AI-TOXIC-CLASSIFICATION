@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Signup - AI Toxicity Classification</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="container">
+        <div class="info-side">
+            <div class="info-content">
+                <div class="logo">
+                    <i class="fas fa-shield-alt"></i>
+                    <h1>Toxicity Shield</h1>
+                </div>
+                <h2>Welcome Back!</h2>
+                <p>Access our advanced AI toxicity detection platform to create safer online spaces and moderate content effectively.</p>
+                <ul class="features">
+                    <li><i class="fas fa-check-circle"></i> Real-time toxicity detection</li>
+                    <li><i class="fas fa-check-circle"></i> Content moderation tools</li>
+                    <li><i class="fas fa-check-circle"></i> Comprehensive analytics</li>
+                </ul>
+            </div>
+        </div>
+        <div class="form-side">
+            <div class="form-nav">
+                <div class="form-nav-item active" id="login-nav">Login</div>
+                <div class="form-nav-item" id="signup-nav">Sign Up</div>
+            </div>
+            <div class="form-container">
+                <div class="form login-form">
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" class="form-control" placeholder="Your email address">
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" class="form-control" placeholder="Your password">
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="remember-me">
+                        <label for="remember-me">Remember me</label>
+                    </div>
+                    <a href="#" class="forgot-password">Forgot password?</a>
+                    <button class="btn"onclick="window.open('index.html','_blank')">Login</button>
+                    <div class="social-login">
+                        <p>Or continue with</p>
+                        <div class="social-icons">
+                            <div class="social-icon"><i class="fab fa-google"></i></div>
+                            <div class="social-icon"><i class="fab fa-facebook-f"></i></div>
+                            <div class="social-icon"><i class="fab fa-twitter"></i></div>
+                        </div>
+                    </div>
+
+                    <div class="form-footer">
+                        Don't have an account? <a href="#" id="signup-link">Sign up</a>
+                    </div>
+                </div>
+                <div class="form signup-form">
+                    <div class="form-group">
+                        <label for="signup-name">Full Name</label>
+                        <input type="text" id="signup-name" class="form-control" placeholder="Your full name">
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-email">Email</label>
+                        <input type="email" id="signup-email" class="form-control" placeholder="Your email address">
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-password">Password</label>
+                        <input type="password" id="signup-password" class="form-control" placeholder="Create a password">
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-confirm-password">Confirm Password</label>
+                        <input type="password" id="signup-confirm-password" class="form-control" placeholder="Confirm your password">
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="terms">
+                        <label for="terms">I agree to the <a href="#" style="color: var(--primary-color);">Terms of Service</a> and <a href="#" style="color: var(--primary-color);">Privacy Policy</a></label>
+                    </div>
+                    <button class="btn">Create Account</button>
+
+                    <div class="social-login">
+                        <p>Or sign up with</p>
+                        <div class="social-icons">
+                            <div class="social-icon"><i class="fab fa-google"></i></div>
+                            <div class="social-icon"><i class="fab fa-facebook-f"></i></div>
+                            <div class="social-icon"><i class="fab fa-twitter"></i></div>
+                        </div>
+                    </div>
+                    <div class="form-footer">
+                        Already have an account? <a href="#" id="login-link">Login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="login.js"></script>
+</body>
+</html>
