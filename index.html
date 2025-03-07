@@ -3,25 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Chatbot</title>
+    <title>AI Toxicity Classifier</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header class="heady">
-        <h1 id="mainhead">AI Toxicity classification</h1>
-    </header>
-    <main class="mainy">
-    <div class="chat-container">
-        <div class="chat-header">AI Chatbot</div>
-        <div class="chat-box" id="chat-box">
-            <div class="message bot">This is an AI Toxic Detection</div>
-        </div>
-        <div class="chat-input">
-            <input type="text" id="user-input" placeholder="Type a message...">
-            <button id="sendbtn">Send</button>
-        </div>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="logo">
+                <i class="fas fa-shield-alt"></i>
+                <h1>ToxiScan</h1>
+            </div>
+            <p class="tagline">AI-Powered Content Toxicity Detection</p>
+        </header>
+        
+        <main class="app-main">
+            <div class="chat-container">
+                <div class="chat-header">
+                    <div class="chat-title">
+                        <i class="fas fa-robot"></i>
+                        <span>AI Assistant</span>
+                    </div>
+                    <div class="header-controls">
+                        <button id="clear-chat" title="Clear conversation">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="chat-box" id="chat-box">
+                    <!-- Messages will be inserted here via JavaScript -->
+                </div>
+                
+                <div class="chat-input-container">
+                    <div class="input-wrapper">
+                        <textarea id="user-input" placeholder="Type a message to analyze..." rows="1"></textarea>
+                        <button id="sendbtn">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    <div class="input-info">Press Enter to send, Shift+Enter for new line</div>
+                </div>
+            </div>
+            
+            <div class="info-panel">
+                <div class="info-section">
+                    <h3>About ToxiScan</h3>
+                    <p>ToxiScan uses advanced AI to detect potentially toxic, harmful, or inappropriate content in text. This tool helps identify hate speech, threats, insults, and other problematic language.</p>
+                </div>
+                
+                <div class="info-section">
+                    <h3>How It Works</h3>
+                    <p>Type any text in the input box and our AI will analyze it for toxicity. The system provides a toxicity score from 0.00 (non-toxic) to 1.00 (highly toxic).</p>
+                </div>
+                
+                <div class="info-section score-legend">
+                    <h3>Score Guide</h3>
+                    <div class="score-item">
+                        <div class="score-indicator low"></div>
+                        <span>0.00-0.30: Low toxicity</span>
+                    </div>
+                    <div class="score-item">
+                        <div class="score-indicator medium"></div>
+                        <span>0.31-0.70: Medium toxicity</span>
+                    </div>
+                    <div class="score-item">
+                        <div class="score-indicator high"></div>
+                        <span>0.71-1.00: High toxicity</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="app-footer">
+            <p>ToxiScan AI Toxicity Classifier &copy; 2025</p>
+        </footer>
     </div>
+    
     <script src="script.js"></script>
-    </main>
 </body>
 </html>
