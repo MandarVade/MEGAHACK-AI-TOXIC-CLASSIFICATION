@@ -27,12 +27,12 @@
     --space-xl: 2rem;      /* 32px */
     
     /* Typography */
-    --font-size-xs: 0.75rem;   /* 12px */
-    --font-size-sm: 0.875rem;  /* 14px */
-    --font-size-md: 1rem;      /* 16px */
-    --font-size-lg: 1.25rem;   /* 20px */
-    --font-size-xl: 1.5rem;    /* 24px */
-    --font-size-2xl: 1.75rem;  /* 28px */
+    --font-size-xs: 0.85rem;   /* 12px */
+    --font-size-sm: 0.975rem;  /* 14px */
+    --font-size-md: 1.1rem;      /* 16px */
+    --font-size-lg: 1.35rem;   /* 20px */
+    --font-size-xl: 1.6rem;    /* 24px */
+    --font-size-2xl: 1.85rem;  /* 28px */
     
     /* UI */
     --border-radius: 0.75rem;  /* 12px */
