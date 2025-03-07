@@ -30,72 +30,55 @@
                 <div class="form-nav-item" id="signup-nav">Sign Up</div>
             </div>
             <div class="form-container">
-                <div class="form login-form">
+                <form id="loginForm" class="form login-form">
                     <div class="form-group">
                         <label for="login-email">Email</label>
-                        <input type="email" id="login-email" class="form-control" placeholder="Your email address">
+                        <input type="email" id="email" name="email" class="form-control" placeholder="Your email address" required>
                     </div>
                     <div class="form-group">
                         <label for="login-password">Password</label>
-                        <input type="password" id="login-password" class="form-control" placeholder="Your password">
+                        <input type="password" id="password" name="password" class="form-control" placeholder="Your password" required>
                     </div>
+                    <p id="signupMessage"></p>
                     <div class="checkbox-group">
                         <input type="checkbox" id="remember-me">
                         <label for="remember-me">Remember me</label>
                     </div>
                     <a href="#" class="forgot-password">Forgot password?</a>
-                    <button class="btn"onclick="window.open('index.html','_blank')">Login</button>
-                    <div class="social-login">
-                        <p>Or continue with</p>
-                        <div class="social-icons">
-                            <div class="social-icon"><i class="fab fa-google"></i></div>
-                            <div class="social-icon"><i class="fab fa-facebook-f"></i></div>
-                            <div class="social-icon"><i class="fab fa-twitter"></i></div>
-                        </div>
-                    </div>
-
+                    <button class="btn" type="submit">Login</button>
                     <div class="form-footer">
                         Don't have an account? <a href="#" id="signup-link">Sign up</a>
                     </div>
-                </div>
-                <div class="form signup-form">
-                    <div class="form-group">
-                        <label for="signup-name">Full Name</label>
-                        <input type="text" id="signup-name" class="form-control" placeholder="Your full name">
-                    </div>
+                </form>
+
+                <form id="signupForm" class="form signup-form">
                     <div class="form-group">
                         <label for="signup-email">Email</label>
-                        <input type="email" id="signup-email" class="form-control" placeholder="Your email address">
+                        <input type="email" id="signupEmail" name="email" class="form-control" placeholder="Your email address" required>
                     </div>
                     <div class="form-group">
                         <label for="signup-password">Password</label>
-                        <input type="password" id="signup-password" class="form-control" placeholder="Create a password">
+                        <input type="password" id="signupPassword" name="password" class="form-control" placeholder="Create a password" required>
                     </div>
                     <div class="form-group">
                         <label for="signup-confirm-password">Confirm Password</label>
-                        <input type="password" id="signup-confirm-password" class="form-control" placeholder="Confirm your password">
+                        <input type="password" id="signupPassword" class="form-control" placeholder="Confirm your password" required>
                     </div>
                     <div class="checkbox-group">
-                        <input type="checkbox" id="terms">
-                        <label for="terms">I agree to the <a href="#" style="color: var(--primary-color);">Terms of Service</a> and <a href="#" style="color: var(--primary-color);">Privacy Policy</a></label>
+                        <input type="checkbox" id="terms" required>
+                        <label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
                     </div>
-                    <button class="btn">Create Account</button>
-
-                    <div class="social-login">
-                        <p>Or sign up with</p>
-                        <div class="social-icons">
-                            <div class="social-icon"><i class="fab fa-google"></i></div>
-                            <div class="social-icon"><i class="fab fa-facebook-f"></i></div>
-                            <div class="social-icon"><i class="fab fa-twitter"></i></div>
-                        </div>
-                    </div>
+                    <button class="btn" type="submit">Create Account</button>
+                    <p id="signupMessage"></p>
                     <div class="form-footer">
                         Already have an account? <a href="#" id="login-link">Login</a>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
+    <script src="loginmain.js"></script>
     <script src="login.js"></script>
+    <script src="server.js"></script>
 </body>
 </html>
