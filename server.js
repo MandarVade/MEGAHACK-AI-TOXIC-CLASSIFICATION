@@ -1,11 +1,16 @@
-require("dotenv").config();
+// require("dotenv").config();
 
 import express from "express";
 import { connect, Schema, model } from "mongoose";
 import cors from "cors";
-import { json } from "body-parser";
 import { genSalt, hash, compare } from "bcryptjs";
-import { sign } from "jsonwebtoken";
+import pkgi  from "jsonwebtoken";
+import { configDotenv } from "dotenv"; 
+import pkg from 'body-parser';
+const { json } = pkg;
+const {sign} = pkg;
+
+configDotenv.apply();
 
 const app = express();
 app.use(cors());
