@@ -101,15 +101,13 @@ body {
 }
 
 .logo i {
-    font-size: var(--font-size-lg);
-    color: var(--text-light);
+    font-size: calc(var(--font-size-lg) * 2.0); /* Increase icon size */
 }
 
 .logo h1 {
-    font-size: var(--font-size-lg);
-    font-weight: 700;
-    color: var(--text-light);
+    font-size: calc(var(--font-size-lg) * 2.0); /* Increase text size */
 }
+
 
 .info-side h2 {
     font-size: var(--font-size-2xl);
@@ -414,4 +412,8 @@ body {
         padding: var(--space-sm) var(--space-sm);
         font-size: var(--font-size-md);
     }
+}
+#only{
+    text-decoration: none;
+    color: white;
 }

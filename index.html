@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,6 +37,9 @@
                 </div>
                 
                 <div class="chat-box" id="chat-box">
+                    <div class="message bot">
+                        Enter any text and this chatbot will detect if there are any foul language.
+                    </div>
                 </div>
                 
                 <div class="chat-input-container">
@@ -57,22 +61,22 @@
                 
                 <div class="info-section">
                     <h3>How It Works</h3>
-                    <p>Type any text in the input box and our AI will analyze it for toxicity. The system provides a toxicity score from 0.00 (non-toxic) to 1.00 (highly toxic).</p>
+                    <p>Type any text in the input box and our AI will analyze it for toxicity. The system provides a simple determination: either "Toxic" or "Not Toxic".</p>
                 </div>
                 
-                <div class="info-section score-legend">
-                    <h3>Score Guide</h3>
-                    <div class="score-item">
-                        <div class="score-indicator low"></div>
-                        <span>0.00-0.30: Low toxicity</span>
+                <div class="info-section binary-result">
+                    <h3>Results Guide</h3>
+                    <div class="result-item">
+                        <div class="result-indicator safe">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <span>Not Toxic: Safe, appropriate content</span>
                     </div>
-                    <div class="score-item">
-                        <div class="score-indicator medium"></div>
-                        <span>0.31-0.70: Medium toxicity</span>
-                    </div>
-                    <div class="score-item">
-                        <div class="score-indicator high"></div>
-                        <span>0.71-1.00: High toxicity</span>
+                    <div class="result-item">
+                        <div class="result-indicator toxic">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <span>Toxic: Contains inappropriate language</span>
                     </div>
                 </div>
             </div>
