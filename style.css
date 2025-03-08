@@ -364,6 +364,37 @@ textarea::placeholder {
   background-color: var(--danger-color);
 }
 
+/* Binary Result Styles */
+.binary-result .result-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
+}
+
+.result-indicator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--border-radius-circle);
+}
+
+.result-indicator.safe {
+  background-color: var(--success-color);
+  color: var(--text-light);
+}
+
+.result-indicator.toxic {
+  background-color: var(--danger-color);
+  color: var(--text-light);
+}
+
+.result-indicator i {
+  font-size: var(--font-size-lg);
+}
+
 /* Footer Styles */
 .app-footer {
   padding: var(--space-md);

@@ -74,10 +74,20 @@ ToxiScan is a full-stack application that allows users to analyze text for toxic
 #### Response:
 ```json
 {
-  "result": "Safe"
+  "result": " Safe Comment!"
 }
 ```
-
+```json
+{
+  "comment": "motherfuc*ker!"
+}
+```
+#### Response:
+```json
+{
+  "result": "Toxic Comment!"
+}
+```
 ## Setup
 ### Clone the repository:
 ```bash
@@ -110,52 +120,7 @@ Authenticates a user and returns a JWT token.
 ### Analyze Comment: `POST /analyze`
 Sends a comment to the Python API for classification.
 
-## Frontend Structure
-### HTML
-- **`index.html`**: Login/signup forms.
-- **`dashboard.html`**: Comment submission and results display.
 
-### CSS
-- **`login.css`**: Styles for all pages.
-
-### JavaScript
-- **`login.js`**: Handles login/signup logic.
-- **`dashboard.js`**: Manages comment submission and display.
-
-## Backend Structure
-### Server
-- **`server.js`**: Manages API requests and database interactions.
-
-### Models
-- **`User.js`**: Defines the user schema.
-- **`Comment.js`**: Defines the comment analysis schema.
-
-### Routes
-- **`/signup`**, **`/login`**, **`/analyze`**
-
-## Python API
-This API processes comments and classifies them as **Toxic** or **Safe.**
-
-### Example Code:
-```python
-from flask import Flask, request, jsonify
-
-app = Flask(__name__)
-
-def analyze_comment(comment):
-    if "hate" in comment.lower():
-        return "Toxic"
-    return "Safe"
-
-@app.route('/analyze', methods=['POST'])
-def analyze():
-    comment = request.json.get('comment')
-    result = analyze_comment(comment)
-    return jsonify({"result": result})
-
-if __name__ == '__main__':
-    app.run(port=8000)
-```
 
 ## Environment Variables
 | Variable       | Description                                      | Example                                    |
@@ -164,10 +129,3 @@ if __name__ == '__main__':
 | `JWT_SECRET`  | Secret key for JWT token generation             | `your_jwt_secret_key`                      |
 | `PORT`        | Port for the backend server                     | `5000`                                     |
 | `PYTHON_API_URL` | URL of the Python toxicity analysis API      | `http://localhost:8000/analyze`           |
-
-## License
-MIT License. See **LICENSE** for details.
-
----
-This README provides a comprehensive guide to setting up, using, and understanding **ToxiScan**. Let me know if you need any refinements! 🚀
-

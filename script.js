@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const response = await fetch("http://127.0.0.1:8000/predict", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ text: comment }) // Fixed the key to "text"
+                body: JSON.stringify({ text: comment })
             });
 
             if (!response.ok) {
@@ -33,11 +33,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const data = await response.json();
 
-            // Fixed response handling based on "class"
+            // Simplified binary response
             if (data.error) {
                 addMessage("⚠️ Server Error: " + data.error, "bot");
             } else {
-                const toxicityStatus = data.class === "Toxic" ? "⚠️ Toxic Comment!" : "✅ Safe Comment!";
+                const toxicityStatus = data.class === "Toxic" 
+                    ? "⚠️ Toxic: This text contains inappropriate language." 
+                    : "✅ Not Toxic: This text appears to be safe.";
                 addMessage(toxicityStatus, "bot");
             }
         } catch (error) {
@@ -55,6 +57,11 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     clearChatButton.addEventListener("click", function () {
-        chatBox.innerHTML = "";
+        // Clear chat but keep the welcome message
+        chatBox.innerHTML = '';
+        const welcomeMessage = document.createElement("div");
+        welcomeMessage.classList.add("message", "bot");
+        welcomeMessage.innerText = "Enter any text and this chatbot will detect if there are any foul language.";
+        chatBox.appendChild(welcomeMessage);
     });
 });

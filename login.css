@@ -415,3 +415,7 @@ body {
         font-size: var(--font-size-md);
     }
 }
+#only{
+    text-decoration: none;
+    color: white;
+}
