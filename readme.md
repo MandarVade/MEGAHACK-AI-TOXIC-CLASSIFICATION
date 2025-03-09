@@ -74,20 +74,10 @@ ToxiScan is a full-stack application that allows users to analyze text for toxic
 #### Response:
 ```json
 {
-  "result": " Safe Comment!"
+  "result": "Safe"
 }
 ```
-```json
-{
-  "comment": "motherfuc*ker!"
-}
-```
-#### Response:
-```json
-{
-  "result": "Toxic Comment!"
-}
-```
+
 ## Setup
 ### Clone the repository:
 ```bash
@@ -120,12 +110,3 @@ Authenticates a user and returns a JWT token.
 ### Analyze Comment: `POST /analyze`
 Sends a comment to the Python API for classification.
 
-
-
-## Environment Variables
-| Variable       | Description                                      | Example                                    |
-|---------------|--------------------------------------------------|--------------------------------------------|
-| `MONGO_URI`   | MongoDB Atlas connection string                 | `mongodb+srv://user:password@cluster0.mongodb.net/dbname` |
-| `JWT_SECRET`  | Secret key for JWT token generation             | `your_jwt_secret_key`                      |
-| `PORT`        | Port for the backend server                     | `5000`                                     |
-| `PYTHON_API_URL` | URL of the Python toxicity analysis API      | `http://localhost:8000/analyze`           |

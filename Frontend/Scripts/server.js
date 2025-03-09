@@ -1,35 +1,41 @@
-require("dotenv").config();
+// require("dotenv").config();
 
-const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
-const bodyParser = require("body-parser");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
+import express from "express";
+import { connect, Schema, model } from "mongoose";
+import cors from "cors";
+import { genSalt, hash, compare } from "bcryptjs";
+import pkgi  from "jsonwebtoken";
+import { configDotenv } from "dotenv"; 
+import pkg from 'body-parser';
+const { json } = pkg;
+const {sign} = pkg;
+
+configDotenv.apply();
 
 const app = express();
 app.use(cors());
-app.use(bodyParser.json());
+app.use(json());
 
 // ✅ Get MongoDB URI from .env
 const mongoURI = process.env.MONGO_URI;
+
 if (!mongoURI) {
     console.error("❌ MongoDB URI is missing. Check your .env file.");
     process.exit(1);
 }
 
 // ✅ Connect to MongoDB Atlas
-mongoose.connect(mongoURI, { retryWrites: true, w: "majority" })
+connect(mongoURI, { retryWrites: true, w: "majority" })
     .then(() => console.log("✅ MongoDB Connected"))
     .catch(err => console.error("❌ MongoDB Connection Error:", err));
 
 // User Schema
-const userSchema = new mongoose.Schema({
+const userSchema = new Schema({
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true }
 });
 
-const User = mongoose.model("User", userSchema);
+const User = model("User", userSchema);
 
 // Signup Route
 app.post("/signup", async (req, res) => {
@@ -39,12 +45,13 @@ app.post("/signup", async (req, res) => {
         // Check if user already exists
         const existingUser = await User.findOne({ email });
         if (existingUser) {
+            alert("user exists");
             return res.status(400).json({ message: "User already exists" });
         }
 
         // Hash password
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(password, salt);
+        const salt = await genSalt(10);
+        const hashedPassword = await hash(password, salt);
 
         // Create new user
         const newUser = new User({ email, password: hashedPassword });
@@ -56,6 +63,13 @@ app.post("/signup", async (req, res) => {
     }
 });
 
+const jwtSecret = process.env.JWT_SECRET;
+console.log(jwtSecret)
+if (!jwtSecret) {
+    console.error("❌ JWT_SECRET is missing. Check your .env file.");
+    process.exit(1);
+}
+
 // Login Route
 app.post("/login", async (req, res) => {
     try {
@@ -64,23 +78,27 @@ app.post("/login", async (req, res) => {
         // Check if user exists
         const user = await User.findOne({ email });
         if (!user) {
-            return res.status(400).json({ message: "Invalid credentials" });
+            return res.status(400).json({ message: "Invalid emais" });
         }
 
         // Compare password
-        const isMatch = await bcrypt.compare(password, user.password);
+        const isMatch = await compare(password, user.password);
         if (!isMatch) {
             return res.status(400).json({ message: "Invalid credentials" });
         }
+        if(isMatch){
+            console.log("is ma      ")
+        }
 
         // Generate JWT token
-        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
+        const token = sign({ id: user._id }, jwtSecret, { expiresIn: "1h" });
 
-        res.json({ message: "Login successful", token });
+        res.json({ message: "Login successful" });
     } catch (error) {
         res.status(500).json({ message: "Server error", error: error.message });
     }
 });
+
 
 // Start Server
 const PORT = process.env.PORT || 5000;
