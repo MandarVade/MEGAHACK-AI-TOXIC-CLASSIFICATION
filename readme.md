@@ -74,14 +74,26 @@ ToxiScan is a full-stack application that allows users to analyze text for toxic
 #### Response:
 ```json
 {
-  "result": "Safe"
+  "result":  "✅ Not Toxic: This text appears to be safe."
+}
+```
+#### Request:
+```json
+{
+  "comment": "(curse/foul language)"
+}
+```
+#### Response:
+```json
+{
+  "result":   "⚠️ Toxic: This text contains inappropriate language."
 }
 ```
 
 ## Setup
 ### Clone the repository:
 ```bash
-git clone https://github.com/your-username/ai-toxicity-platform.git
+git clone https://github.com/MandarVade/MEGAHACK-AI-TOXIC-CLASSIFICATION.git
 cd ai-toxicity-platform
 ```
 ### Install dependencies:
@@ -93,20 +105,11 @@ npm install
 MONGO_URI=mongodb+srv://<username>:<password>@cluster0.mongodb.net/<dbname>?retryWrites=true&w=majority
 JWT_SECRET=your_jwt_secret_key
 PORT=5000
-PYTHON_API_URL=http://localhost:8000/analyze
+
 ```
 ### Start the server:
 ```bash
 npm start
 ```
 
-## API Endpoints
-### Signup: `POST /signup`
-Registers a new user.
-
-### Login: `POST /login`
-Authenticates a user and returns a JWT token.
-
-### Analyze Comment: `POST /analyze`
-Sends a comment to the Python API for classification.
 

@@ -1,20 +1,17 @@
-// require("dotenv").config();
-
 import express from "express";
 import { connect, Schema, model } from "mongoose";
 import cors from "cors";
 import { genSalt, hash, compare } from "bcryptjs";
-import pkgi  from "jsonwebtoken";
-import { configDotenv } from "dotenv"; 
-import pkg from 'body-parser';
-const { json } = pkg;
-const {sign} = pkg;
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv"; 
+import bodyParser from "body-parser"; 
 
-configDotenv.apply();
+// ✅ Specify the correct path to the .env file
+dotenv.config({ path: "../../Backend/.env" });
 
 const app = express();
 app.use(cors());
-app.use(json());
+app.use(bodyParser.json());
 
 // ✅ Get MongoDB URI from .env
 const mongoURI = process.env.MONGO_URI;
@@ -27,7 +24,10 @@ if (!mongoURI) {
 // ✅ Connect to MongoDB Atlas
 connect(mongoURI, { retryWrites: true, w: "majority" })
     .then(() => console.log("✅ MongoDB Connected"))
-    .catch(err => console.error("❌ MongoDB Connection Error:", err));
+    .catch(err => {
+        console.error("❌ MongoDB Connection Error:", err);
+        process.exit(1);
+    });
 
 // User Schema
 const userSchema = new Schema({
@@ -45,7 +45,6 @@ app.post("/signup", async (req, res) => {
         // Check if user already exists
         const existingUser = await User.findOne({ email });
         if (existingUser) {
-            alert("user exists");
             return res.status(400).json({ message: "User already exists" });
         }
 
@@ -59,12 +58,14 @@ app.post("/signup", async (req, res) => {
 
         res.status(201).json({ message: "User registered successfully" });
     } catch (error) {
+        console.error("❌ Signup Error:", error);
         res.status(500).json({ message: "Server error", error: error.message });
     }
 });
 
+// ✅ Get JWT Secret from .env
 const jwtSecret = process.env.JWT_SECRET;
-console.log(jwtSecret)
+
 if (!jwtSecret) {
     console.error("❌ JWT_SECRET is missing. Check your .env file.");
     process.exit(1);
@@ -78,7 +79,7 @@ app.post("/login", async (req, res) => {
         // Check if user exists
         const user = await User.findOne({ email });
         if (!user) {
-            return res.status(400).json({ message: "Invalid emais" });
+            return res.status(400).json({ message: "Invalid email" });
         }
 
         // Compare password
@@ -86,19 +87,16 @@ app.post("/login", async (req, res) => {
         if (!isMatch) {
             return res.status(400).json({ message: "Invalid credentials" });
         }
-        if(isMatch){
-            console.log("is ma      ")
-        }
 
         // Generate JWT token
-        const token = sign({ id: user._id }, jwtSecret, { expiresIn: "1h" });
+        const token = jwt.sign({ id: user._id }, jwtSecret, { expiresIn: "1h" });
 
-        res.json({ message: "Login successful" });
+        res.json({ message: "Login successful", token });
     } catch (error) {
+        console.error("❌ Login Error:", error);
         res.status(500).json({ message: "Server error", error: error.message });
     }
 });
-
 
 // Start Server
 const PORT = process.env.PORT || 5000;
