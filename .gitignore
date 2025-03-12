@@ -17,6 +17,6 @@ psd
 thumb
 sketch
 .env
-backend/.env
+Backend/.env
 
 # End of https://www.toptal.com/developers/gitignore/api/react
