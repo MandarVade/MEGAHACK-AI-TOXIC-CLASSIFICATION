@@ -1,115 +1,57 @@
-# AI Toxicity Classification Platform
+# ToxiScan - AI Toxicity Classification Platform
 
-## Overview
-ToxiScan is a full-stack application that allows users to analyze text for toxicity. It provides a secure login/signup system and integrates a toxicity detection API to classify user-submitted comments as "Toxic" or "Safe."
+ToxiScan is a full-stack application that analyzes text for toxicity. It offers a secure login/signup system and an AI-powered detection API to classify incoming comments as safe or toxic in real-time.
 
-## Features
-### User Authentication
-- Secure signup and login using **bcryptjs** for password hashing.
-- **JWT** authentication for session management.
+---
 
-### Toxic Comment Detection
-- **Python API** processes user comments.
-- Returns classification results as **Toxic** or **Safe.**
+## 🏗 Architecture & Technical Overview
 
-### Database
-- **MongoDB Atlas** stores user data and analysis results.
+This project uses a decoupled, dual-backend architecture to securely handle user authentication while providing fast Machine Learning inference. 
 
-### Responsive Design
-- Clean UI for **login, signup, and comment submission.**
+1. **Frontend (Static UI)**: Vanilla HTML, CSS, and JS. The client directly interfaces with both backend services via REST API calls. 
+2. **Auth Service (Node.js)**: Runs locally on port `5000`. Built with Express and MongoDB. It handles user registration, securely hashes passwords using `bcryptjs`, issues `JWT` tokens for session management, and verifies if user accounts exist.
+3. **AI Inference Service (Python)**: Runs locally on port `8000`. Built with FastAPI. It loads pre-trained scikit-learn machine learning models from disk and exposes the `/predict` endpoint for low-latency text classification.
 
-## How It Works
-### Signup/Login
-1. Users sign up or log in using their email and password.
-2. Passwords are securely hashed.
-3. JWT tokens are generated for user sessions.
+## 🧠 How the Toxicity Model Works
 
-### Comment Analysis
-1. Users submit comments via the UI.
-2. The Python API processes the comment.
-3. The system returns a classification as **Toxic** or **Safe.**
+To determine whether a piece of text is "Toxic" (inappropriate/foul language) or "Non-Toxic" (safe), the platform utilizes a classical Natural Language Processing (NLP) pipeline running on the Python backend:
 
-### Session Management
-- **JWT token** is used for authentication in protected routes.
+1. **Text Transformation (TF-IDF)**: When a comment is submitted by the user, the FastAPI server passes the raw string to a pre-trained **TF-IDF Vectorizer** (Term Frequency-Inverse Document Frequency). This algorithm converts the text into a mathematical array of numbers, weighing the importance of specific words while filtering out common English filler words.
+2. **Multinomial Naive Bayes Classification**: The vectorized array is fed into a trained **MultinomialNB** machine learning model. This is a probabilistic algorithm heavily optimized for text classification. It computes the statistical probability that the sequence of words belongs to the "Toxic" category based on the dataset it was originally trained on.
+3. **Binary Inference**: The model outputs a definitive `1` (Toxic) or `0` (Non-Toxic). The Python server instantly formats this into a JSON payload and returns it to the frontend, which updates the chat interface accordingly.
 
-## Example Workflow
-### Signup
-#### Request:
-```json
-{
-  "email": "user@example.com",
-  "password": "password123"
-}
-```
-#### Response:
-```json
-{
-  "message": "User registered successfully"
-}
-```
+---
 
-### Login
-#### Request:
-```json
-{
-  "email": "user@example.com",
-  "password": "password123"
-}
-```
-#### Response:
-```json
-{
-  "message": "Login successful",
-  "token": "jwt_token_here"
-}
-```
+## 💻 Tech Stack
+- **Frontend**: HTML5, CSS3, Vanilla JavaScript (Fetch API)
+- **Auth Backend**: Node.js, Express, MongoDB (Mongoose), JWT, bcryptjs
+- **Machine Learning Backend**: Python 3.x, FastAPI, Uvicorn, scikit-learn, pickle
+- **ML Models**: Multinomial Naive Bayes, TF-IDF Vectorizer (`.pkt` files)
 
-### Comment Analysis
-#### Request:
-```json
-{
-  "comment": "This is great!"
-}
-```
-#### Response:
-```json
-{
-  "result":  "✅ Not Toxic: This text appears to be safe."
-}
-```
-#### Request:
-```json
-{
-  "comment": "(curse/foul language)"
-}
-```
-#### Response:
-```json
-{
-  "result":   "⚠️ Toxic: This text contains inappropriate language."
-}
-```
+---
 
-## Setup
-### Clone the repository:
+## ⚙️ Quick Setup
+
+### 1. Clone the repository
 ```bash
 git clone https://github.com/MandarVade/MEGAHACK-AI-TOXIC-CLASSIFICATION.git
-cd ai-toxicity-platform
+cd MEGAHACK-AI-TOXIC-CLASSIFICATION
 ```
-### Install dependencies:
-```bash
-npm install
-```
-### Create a `.env` file:
-```plaintext
-MONGO_URI=mongodb+srv://<username>:<password>@cluster0.mongodb.net/<dbname>?retryWrites=true&w=majority
-JWT_SECRET=your_jwt_secret_key
-PORT=5000
 
-```
-### Start the server:
+### 2. Start Auth Server (Node.js)
 ```bash
+cd Backend
+npm install
+cp .env.example .env  # Update MongoDB & JWT configs inside .env
 npm start
 ```
 
+### 3. Start AI API (Python)
+*Open a new terminal window, navigate to the `Backend` folder:*
+```bash
+pip install -r requirements.txt
+uvicorn main:app --reload
+```
 
+### 4. Run the App
+Open the `Frontend/Public/login.html` file directly in your web browser. Ensure both the Node Server (5000) and Python Server (8000) are running smoothly in the background.

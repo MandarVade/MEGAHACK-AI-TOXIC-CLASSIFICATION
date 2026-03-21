@@ -7,7 +7,7 @@ import dotenv from "dotenv";
 import bodyParser from "body-parser"; 
 
 // ✅ Specify the correct path to the .env file
-dotenv.config({ path: "../../Backend/.env" });
+dotenv.config({ path: "./.env" });
 
 const app = express();
 app.use(cors());
@@ -70,6 +70,22 @@ if (!jwtSecret) {
     console.error("❌ JWT_SECRET is missing. Check your .env file.");
     process.exit(1);
 }
+
+// Check Email Route
+app.post("/check-email", async (req, res) => {
+    try {
+        const { email } = req.body;
+        const user = await User.findOne({ email });
+        if (user) {
+            return res.status(200).json({ message: "Email exists" });
+        } else {
+            return res.status(404).json({ message: "Email not found" });
+        }
+    } catch (error) {
+        console.error("❌ Check Email Error:", error);
+        res.status(500).json({ message: "Server error", error: error.message });
+    }
+});
 
 // Login Route
 app.post("/login", async (req, res) => {
